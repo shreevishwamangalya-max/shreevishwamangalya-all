@@ -10,138 +10,314 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
 <style>
-  :root{
+  :root {
     --purple-deep: #6d28d9;
     --purple: #7c3aed;
     --purple-light: #a78bfa;
     --pink: #db2777;
     --pink-light: #f472b6;
     --bg: #faf7f2;
-    --text: #111827;
-    --muted: #6b7280;
+    --text: #1e1b4b;
+    --muted: #64748b;
     --card: #ffffff;
     --card-border: rgba(109,40,217,0.08);
     --shadow: 0 4px 16px rgba(109,40,217,0.08);
+    --shadow-hover: 0 8px 28px rgba(109,40,217,0.14);
     --radius: 18px;
     --font-display: 'Playfair Display', serif;
     --font-body: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{-webkit-text-size-adjust:100%;}
-  body{
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+  body {
     font-family: var(--font-body);
     color: var(--text);
-    min-height: 100vh;
+    min-height: 100dvh;
     background: var(--bg);
-    display: flex; justify-content: center;
-    padding: 40px 16px calc(40px + env(safe-area-inset-bottom));
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 32px 20px calc(32px + env(safe-area-inset-bottom));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  .wrap{width:100%;max-width:460px;display:flex;flex-direction:column;gap:16px;}
+  .wrap {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 
   /* ===== Profile ===== */
-  .profile{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;}
-
-  .avatar{
-    width:110px;height:110px;border-radius:28px;
-    object-fit:cover;display:flex;align-items:center;justify-content:center;
-    font-size:32px;font-weight:700;color:#fff;
-    font-family:var(--font-display);
-    background:linear-gradient(135deg,var(--purple-deep),var(--pink));
-    box-shadow:0 8px 24px rgba(109,40,217,0.25);
-    letter-spacing:1px;
+  .profile {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
   }
 
-  .name{
-    font-family:var(--font-display);
-    font-size:25px;font-weight:800;line-height:1.2;
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 24px;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+    font-family: var(--font-display);
+    background: linear-gradient(135deg, var(--purple-deep), var(--pink));
+    box-shadow: 0 8px 24px rgba(109,40,217,0.2);
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+
+  .name {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 5.5vw, 26px);
+    font-weight: 800;
+    line-height: 1.25;
     color: var(--purple-deep);
   }
-  .name-sub{
-    font-size:13px;font-weight:600;color:var(--muted);
-    background:rgba(255,255,255,0.7);
-    padding:4px 14px;border-radius:999px;
-    border:1px solid rgba(109,40,217,0.08);
-  }
-  .tagline{
-    color:var(--muted);font-size:14px;line-height:1.55;max-width:340px;
-    background:rgba(255,255,255,0.5);
-    padding:8px 18px;border-radius:12px;
-    border:1px solid rgba(109,40,217,0.05);
-  }
-  .verify{
-    display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;color:var(--purple);
-    background:rgba(109,40,217,0.07);border:1px solid rgba(109,40,217,0.15);
-    padding:5px 14px;border-radius:999px;
-  }
-  .rating-badge{
-    display:inline-flex;align-items:center;gap:5px;
-    background:rgba(255,215,0,0.12);border:1px solid rgba(255,215,0,0.25);
-    padding:4px 13px;border-radius:999px;
-    font-size:12.5px;font-weight:600;color:#b8860b;
-  }
-  .rating-badge .stars{color:#ffd700;letter-spacing:2px;font-size:13px;}
 
-  /* ===== Buttons ===== */
-  .links{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
-
-  .btn{
-    display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;padding:16px 10px;
-    border:1px solid var(--card-border);background:var(--card);
-    color:var(--text);text-decoration:none;border-radius:var(--radius);
-    text-align:center;
-    box-shadow:var(--shadow);
-    transition: box-shadow .15s ease;
-  }
-  .btn:hover{
-    box-shadow:0 6px 20px rgba(109,40,217,0.12);
+  .name-sub {
+    font-size: clamp(12px, 3.2vw, 13px);
+    font-weight: 600;
+    color: var(--muted);
+    background: rgba(255,255,255,0.7);
+    padding: 5px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(109,40,217,0.08);
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  .btn .ico{
-    width:48px;height:48px;flex:0 0 48px;border-radius:14px;
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 4px 12px rgba(0,0,0,0.12);
+  .tagline {
+    color: var(--muted);
+    font-size: clamp(13px, 3.4vw, 14px);
+    line-height: 1.6;
+    max-width: 340px;
+    background: rgba(255,255,255,0.5);
+    padding: 10px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(109,40,217,0.05);
   }
-  .btn .ico svg{width:24px;height:24px;fill:#fff;}
-  .btn .txt{display:flex;flex-direction:column;align-items:center;line-height:1.25;}
-  .btn .txt strong{font-size:14px;font-weight:700;}
-  .btn .txt small{font-weight:500;font-size:11px;color:var(--muted);margin-top:2px;}
+
+  .badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .verify {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--purple);
+    background: rgba(109,40,217,0.07);
+    border: 1px solid rgba(109,40,217,0.15);
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+
+  .rating-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,215,0,0.12);
+    border: 1px solid rgba(255,215,0,0.25);
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #b8860b;
+  }
+  .rating-badge .stars { color: #ffd700; letter-spacing: 1.5px; font-size: 12px; }
+
+  /* ===== Buttons Grid ===== */
+  .links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 120px;
+    padding: 18px 12px 16px;
+    border: 1px solid var(--card-border);
+    background: var(--card);
+    color: var(--text);
+    text-decoration: none;
+    border-radius: var(--radius);
+    text-align: center;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+  .btn:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: var(--shadow);
+  }
+
+  .btn .ico {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .btn .ico svg { width: 22px; height: 22px; fill: #fff; }
+
+  .btn .txt { display: flex; flex-direction: column; align-items: center; line-height: 1.3; gap: 2px; }
+  .btn .txt strong { font-size: clamp(12.5px, 3.2vw, 14px); font-weight: 700; }
+  .btn .txt small { font-weight: 500; font-size: clamp(10px, 2.8vw, 11px); color: var(--muted); }
 
   /* Icon gradients */
-  .ico.web{background:linear-gradient(135deg,#0ea5e9,#2563eb);}
-  .ico.yt{background:linear-gradient(135deg,#ff0000,#dc2626);}
-  .ico.ig{background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af,#515bd4);}
-  .ico.gb{background:linear-gradient(135deg,#fbbf24,#ea580c);}
-  .ico.rev{background:linear-gradient(135deg,#f43f5e,#e11d48);}
-  .ico.loc{background:linear-gradient(135deg,#10b981,#059669);}
-  .ico.wa{background:linear-gradient(135deg,#25d366,#128c7e);}
-  .ico.mail{background:linear-gradient(135deg,#8b5cf6,#6d28d9);}
-  .ico.wac{background:linear-gradient(135deg,#25d366,#075e54);}
+  .ico.web { background: linear-gradient(135deg, #0ea5e9, #2563eb); }
+  .ico.yt { background: linear-gradient(135deg, #ff0000, #dc2626); }
+  .ico.ig { background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4); }
+  .ico.gb { background: linear-gradient(135deg, #fbbf24, #ea580c); }
+  .ico.rev { background: linear-gradient(135deg, #f43f5e, #e11d48); }
+  .ico.loc { background: linear-gradient(135deg, #10b981, #059669); }
+  .ico.wa { background: linear-gradient(135deg, #25d366, #128c7e); }
+  .ico.mail { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+  .ico.wac { background: linear-gradient(135deg, #25d366, #075e54); }
 
   /* ===== Footer ===== */
-  footer{
-    text-align:center;font-size:12px;
-    color:var(--muted);margin-top:4px;
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    padding: 4px 0;
   }
-  footer a{
-    color:var(--purple);text-decoration:none;font-weight:600;
+  footer a {
+    color: var(--purple);
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  footer a:hover { text-decoration: underline; }
+
+  /* ===== Toast ===== */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--purple-deep);
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    z-index: 50;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ===== RESPONSIVE ===== */
+
+  /* Small phones (320px - 374px) */
+  @media (max-width: 374px) {
+    body { padding: 20px 14px; }
+    .wrap { gap: 14px; }
+    .avatar { width: 80px; height: 80px; border-radius: 20px; font-size: 24px; }
+    .name { font-size: 20px; }
+    .links { gap: 8px; }
+    .btn { min-height: 100px; padding: 14px 8px 12px; border-radius: 14px; gap: 8px; }
+    .btn .ico { width: 40px; height: 40px; min-width: 40px; min-height: 40px; border-radius: 12px; }
+    .btn .ico svg { width: 20px; height: 20px; }
+    .tagline { padding: 8px 14px; }
+    .name-sub { font-size: 11px; padding: 4px 10px; }
   }
 
-  .toast{
-    position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
-    background:var(--purple-deep);color:#fff;padding:12px 22px;border-radius:12px;font-weight:600;font-size:14px;
-    opacity:0;pointer-events:none;transition:all .2s ease;z-index:50;
+  /* Standard phones (375px - 479px) */
+  @media (min-width: 375px) and (max-width: 479px) {
+    body { padding: 28px 18px; }
+    .links { gap: 10px; }
+    .btn { min-height: 110px; padding: 16px 10px 14px; }
   }
-  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-  @media (max-width:380px){
-    .name{font-size:21px;}
-    .avatar{width:94px;height:94px;font-size:28px;border-radius:22px;}
-    .links{gap:10px;} .btn{padding:14px 8px;} .btn .ico{width:42px;height:42px;flex-basis:42px;}
-    .btn .txt strong{font-size:13px;}
-    .tagline{font-size:13px;padding:6px 14px;}
+  /* Large phones / small tablets (480px - 767px) */
+  @media (min-width: 480px) and (max-width: 767px) {
+    body { padding: 36px 24px; }
+    .wrap { max-width: 500px; }
+    .links { gap: 14px; }
+    .btn { min-height: 130px; padding: 20px 14px 18px; }
+    .btn .ico { width: 52px; height: 52px; min-width: 52px; min-height: 52px; }
+  }
+
+  /* Tablets (768px+) */
+  @media (min-width: 768px) {
+    body { padding: 48px 32px; align-items: center; }
+    .wrap { max-width: 520px; gap: 24px; }
+    .avatar { width: 116px; height: 116px; border-radius: 28px; }
+    .links { gap: 16px; }
+    .btn { min-height: 140px; padding: 22px 16px 18px; }
+    .btn .ico { width: 54px; height: 54px; min-width: 54px; min-height: 54px; border-radius: 16px; }
+    .btn .ico svg { width: 26px; height: 26px; }
+    .btn:hover { transform: translateY(-3px); }
+  }
+
+  /* Landscape phones */
+  @media (max-height: 500px) and (orientation: landscape) {
+    body { padding: 16px 20px; align-items: flex-start; }
+    .wrap { max-width: 560px; gap: 12px; }
+    .avatar { width: 70px; height: 70px; border-radius: 18px; }
+    .profile { gap: 8px; }
+    .links { gap: 8px; }
+    .btn { min-height: 90px; padding: 12px 8px; gap: 6px; }
+    .btn .ico { width: 38px; height: 38px; min-width: 38px; min-height: 38px; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .btn { transition: none; }
+    .toast { transition: none; }
+    .btn:hover { transform: none; }
+    .btn:active { transform: none; }
+  }
+
+  /* Focus states for accessibility */
+  .btn:focus-visible {
+    outline: 3px solid var(--purple);
+    outline-offset: 2px;
+  }
+  footer a:focus-visible {
+    outline: 2px solid var(--purple);
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 </style>
 </head>
@@ -151,43 +327,43 @@
     <section class="profile">
       <div class="avatar" id="avatar">SV</div>
       <h1 class="name" id="brandName">Shree Vishwamangalya<br/>Ayurveda</h1>
-      <span class="name-sub">🕉 Dr. Naresh Padwal · BAMS, MD (Ayurveda)</span>
-      <p class="tagline" id="brandTag">Authentic Ayurvedic &amp; Panchakarma Clinic — Girgaon, Mumbai 🌿</p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:2px;">
-        <span class="verify">✔ Verified Clinic</span>
+      <span class="name-sub">Dr. Naresh Padwal · BAMS, MD (Ayurveda)</span>
+      <p class="tagline" id="brandTag">Authentic Ayurvedic &amp; Panchakarma Clinic — Girgaon, Mumbai</p>
+      <div class="badges">
+        <span class="verify"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Verified Clinic</span>
         <span class="rating-badge"><span class="stars">★★★★★</span> 4.9</span>
       </div>
     </section>
 
-    <nav class="links" id="links"></nav>
+    <nav class="links" id="links" aria-label="Quick links"></nav>
 
     <footer>
-      Made with ❤️ in Girgaon 🪷 · <a href="#" id="shareBtn">Share this page</a>
+      Made with care in Girgaon · <a href="#" id="shareBtn" role="button" aria-label="Share this page">Share this page</a>
     </footer>
   </main>
 
-  <div class="toast" id="toast">✓ Link copied!</div>
+  <div class="toast" id="toast" role="alert" aria-live="polite">Link copied!</div>
+</body>
+</html>
+
 
 <script>
-  // ===================== CONFIG =====================
   const CONFIG = {
     name: "Shree Vishwamangalya Ayurveda",
     avatarText: "SV",
     avatarImage: "Clinic Logo.png",
-    tagline: "Authentic Ayurvedic & Panchakarma Clinic — Girgaon, Mumbai 🌿",
-
+    tagline: "Authentic Ayurvedic & Panchakarma Clinic — Girgaon, Mumbai",
     links: [
-      { key:"web",  icon:"web",  title:"Book Appointment Online", sub:"Book Appointment & explore treatments",   url:"https://shreevishwamangalyaayurveda.com/" },
-      { key:"yt",   icon:"yt",   title:"YouTube",            sub:"Watch health tips & insights",           url:"https://youtube.com/@shreevishwamangalyaayurved6239?si=mEP2-U6h1HpETtY0" },
-      { key:"ig",   icon:"ig",   title:"Instagram",          sub:"Daily wellness updates",                 url:"https://www.instagram.com/shree_vishwamangalya_ayurved?igsh=NTRwdTVlNHp5eHBp" },
-      { key:"gb",   icon:"gb",   title:"Google Business",    sub:"View clinic profile",                    url:"https://share.google/X29UcsJx9bFeHnh5d" },
-      { key:"rev",  icon:"rev",  title:"Leave a Review",     sub:"Rate us on Google ⭐",                   url:"https://g.page/r/CYeVWBC5N4_GEA0/review" },
-      { key:"loc",  icon:"loc",  title:"Find Us / Location", sub:"Get directions on Maps",                 url:"https://maps.app.goo.gl/mudnBSUZMQdAr2U38" },
-      { key:"wa",   icon:"wac",  title:"WhatsApp Channel",   sub:"Join our health channel",                url:"https://whatsapp.com/channel/0029VbD3MWgAu3aWxPhosk2m" },
-      { key:"mail", icon:"mail", title:"Email Us",           sub:"shreevishwamangalya@gmail.com",          url:"mailto:shreevishwamangalya@gmail.com" }
+      { key:"web",  icon:"web",  title:"Book Appointment", sub:"Explore treatments online",   url:"https://shreevishwamangalyaayurveda.com/" },
+      { key:"yt",   icon:"yt",   title:"YouTube",          sub:"Health tips & insights",      url:"https://youtube.com/@shreevishwamangalyaayurved6239?si=mEP2-U6h1HpETtY0" },
+      { key:"ig",   icon:"ig",   title:"Instagram",        sub:"Daily wellness updates",      url:"https://www.instagram.com/shree_vishwamangalya_ayurved?igsh=NTRwdTVlNHp5eHBp" },
+      { key:"gb",   icon:"gb",   title:"Google Business",  sub:"View clinic profile",         url:"https://share.google/X29UcsJx9bFeHnh5d" },
+      { key:"rev",  icon:"rev",  title:"Leave a Review",   sub:"Rate us on Google",           url:"https://g.page/r/CYeVWBC5N4_GEA0/review" },
+      { key:"loc",  icon:"loc",  title:"Find Us",          sub:"Get directions on Maps",      url:"https://maps.app.goo.gl/mudnBSUZMQdAr2U38" },
+      { key:"wa",   icon:"wac",  title:"WhatsApp Channel", sub:"Join our health channel",     url:"https://whatsapp.com/channel/0029VbD3MWgAu3aWxPhosk2m" },
+      { key:"mail", icon:"mail", title:"Email Us",         sub:"shreevishwamangalya@gmail.com", url:"mailto:shreevishwamangalya@gmail.com" }
     ]
   };
-  // =================================================
 
   const ICONS = {
     web:'<path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.93 6h-2.95a15.6 15.6 0 00-1.38-3.56A8 8 0 0118.93 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14a7.96 7.96 0 010-4h3.38a16.5 16.5 0 000 4H4.26zm.81 2h2.95c.32 1.25.78 2.45 1.38 3.56A8 8 0 015.07 16zm2.95-8H5.07a8 8 0 014.33-3.56A15.6 15.6 0 008.02 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82A13.7 13.7 0 0112 19.96zM14.34 14H9.66a14.7 14.7 0 010-4h4.68a14.7 14.7 0 010 4zm.27 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8 8 0 01-4.33 3.56zM16.36 14a16.5 16.5 0 000-4h3.38a7.96 7.96 0 010 4h-3.38z"/>',
@@ -196,49 +372,43 @@
     gb:'<path d="M12 2a10 10 0 010 20 10 10 0 010-20zm0 4.2c1.9 0 3.5 1.4 3.5 3.2 0 1.8-1.6 3.2-3.5 3.2S8.5 11.2 8.5 9.4c0-1.8 1.6-3.2 3.5-3.2zM6.2 18.3c.7-2.3 2.9-3.9 5.8-3.9s5.1 1.6 5.8 3.9a8 8 0 01-11.6 0z"/>',
     rev:'<path d="M12 2l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9z"/>',
     loc:'<path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/>',
-    wa:'<path d="M12 2a10 10 0 00-8.5 15.3L2 22l4.8-1.5A10 10 0 1012 2zm0 1.8a8.2 8.2 0 018.2 8.2 8.2 8.2 0 01-8.2 8.2 8.2 8.2 0 01-4.2-1.1l-.3-.2-2.6.8.8-2.5-.2-.3a8.2 8.2 0 014.5-14.9zm-2.6 4.3c-.2 0-.5 0-.7.3l-.9.9c-.2.2-.7.7-.7 1.6s.8 1.9.9 2a3.4 3.4 0 001.5 1.2c.3.1.5.1.7-.1.2-.2.6-.7.8-1 .2-.2.3-.2.6-.1.3.1 1.6.8 1.9.9.3.1.5.2.6.3.2.2.2.4.1.6-.1.2-.4.8-.7 1.1-.3.3-1.5 1.5-2 1.5-1 0-1.9-.3-2.7-.8a8.4 8.4 0 01-2.6-3.4c-.3-.8-.5-1.7-.5-2.5 0-.8.4-1.5.7-2.1.2-.4 1.2-2.3 1.9-2.6.3-.1.6-.2.8-.2z"/>',
-    wac:'<path d="M12 2a10 10 0 100 20 10 10 0 000-20zm4.47 14.47l-1.2.6a9.1 9.1 0 01-4.07.98 9.1 9.1 0 01-4.07-.98l-1.2-.6a1 1 0 01-.55-.9v-1.14a1 1 0 01.55-.9l1.2-.6a9.1 9.1 0 014.07-.97c1.45 0 2.84.35 4.07.97l1.2.6a1 1 0 01.55.9v1.14a1 1 0 01-.55.9zM12 8.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/>',
+    wac:'<path d="M12 2a10 10 0 00-8.5 15.3L2 22l4.8-1.5A10 10 0 1012 2zm0 1.8a8.2 8.2 0 018.2 8.2 8.2 8.2 0 01-8.2 8.2 8.2 8.2 0 01-4.2-1.1l-.3-.2-2.6.8.8-2.5-.2-.3a8.2 8.2 0 014.5-14.9zm-2.6 4.3c-.2 0-.5 0-.7.3l-.9.9c-.2.2-.7.7-.7 1.6s.8 1.9.9 2a3.4 3.4 0 001.5 1.2c.3.1.5.1.7-.1.2-.2.6-.7.8-1 .2-.2.3-.2.6-.1.3.1 1.6.8 1.9.9.3.1.5.2.6.3.2.2.2.4.1.6-.1.2-.4.8-.7 1.1-.3.3-1.5 1.5-2 1.5-1 0-1.9-.3-2.7-.8a8.4 8.4 0 01-2.6-3.4c-.3-.8-.5-1.7-.5-2.5 0-.8.4-1.5.7-2.1.2-.4 1.2-2.3 1.9-2.6.3-.1.6-.2.8-.2z"/>',
     mail:'<path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5z"/>'
   };
 
   // Profile
-  document.getElementById('brandName').innerHTML = CONFIG.name.replace(/\n/g,'<br/>');
-  document.getElementById('brandTag').textContent = CONFIG.tagline;
   const av = document.getElementById('avatar');
-  if (CONFIG.avatarImage){
-    av.style.background = `url('${CONFIG.avatarImage}') center/cover`;
+  if (CONFIG.avatarImage) {
+    av.style.background = "url('" + CONFIG.avatarImage + "') center/cover";
     av.textContent = "";
-  } else {
-    av.textContent = CONFIG.avatarText;
   }
 
   // Build buttons
   const linksBox = document.getElementById('links');
-  CONFIG.links.filter(l => l.url).forEach((l, i) => {
+  CONFIG.links.filter(function(l) { return l.url; }).forEach(function(l) {
     const a = document.createElement('a');
     a.className = 'btn';
     a.href = l.url;
     a.target = '_blank';
-    a.rel = 'noopener';
+    a.rel = 'noopener noreferrer';
+    a.setAttribute('aria-label', l.title + ' - ' + l.sub);
     const iconHtml = ICONS[l.icon] || '';
-    a.innerHTML = `<span class="ico ${l.icon}"><svg viewBox="0 0 24 24">${iconHtml}</svg></span>
-      <span class="txt"><strong>${l.title}</strong><small>${l.sub}</small></span>`;
+    a.innerHTML = '<span class="ico ' + l.icon + '"><svg viewBox="0 0 24 24" aria-hidden="true">' + iconHtml + '</svg></span><span class="txt"><strong>' + l.title + '</strong><small>' + l.sub + '</small></span>';
     linksBox.appendChild(a);
   });
 
-  // ===== Share =====
-  document.getElementById('shareBtn').addEventListener('click', async e => {
+  // Share
+  document.getElementById('shareBtn').addEventListener('click', async function(e) {
     e.preventDefault();
     if (navigator.share) {
-      try { await navigator.share({ title: CONFIG.name, url: location.href }); } catch (_) {}
+      try { await navigator.share({ title: CONFIG.name, url: location.href }); } catch (err) {}
     } else {
       await navigator.clipboard.writeText(location.href);
       const t = document.getElementById('toast');
-      t.textContent = '✓ Link copied!';
       t.classList.add('show');
-      setTimeout(() => { t.classList.remove('show'); }, 2000);
+      setTimeout(function() { t.classList.remove('show'); }, 2200);
     }
   });
 </script>
-</body>
-</html>
+</content>
+</invoke>
