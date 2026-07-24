@@ -153,15 +153,16 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
+    grid-auto-rows: 1fr;
   }
 
   .btn {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     width: 100%;
-    min-height: 120px;
     padding: 18px 12px 16px;
     border: 1px solid var(--card-border);
     background: var(--card);
@@ -174,6 +175,22 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     -webkit-tap-highlight-color: transparent;
   }
+
+  .btn.primary {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 14px;
+    padding: 18px 22px;
+    background: linear-gradient(135deg, var(--purple-deep), var(--purple));
+    color: #fff;
+    border: none;
+    box-shadow: 0 6px 20px rgba(109,40,217,0.25);
+  }
+  .btn.primary .txt { align-items: flex-start; }
+  .btn.primary .txt strong { font-size: 16px; color: #fff; }
+  .btn.primary .txt small { color: rgba(255,255,255,0.8); }
+  .btn.primary .ico { box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
   .btn:hover {
     box-shadow: var(--shadow-hover);
     transform: translateY(-2px);
@@ -255,7 +272,8 @@
     .avatar { width: 80px; height: 80px; border-radius: 20px; font-size: 24px; }
     .name { font-size: 20px; }
     .links { gap: 8px; }
-    .btn { min-height: 100px; padding: 14px 8px 12px; border-radius: 14px; gap: 8px; }
+    .btn { padding: 14px 8px 12px; border-radius: 14px; gap: 8px; }
+    .btn.primary { padding: 14px 16px; }
     .btn .ico { width: 40px; height: 40px; min-width: 40px; min-height: 40px; border-radius: 12px; }
     .btn .ico svg { width: 20px; height: 20px; }
     .tagline { padding: 8px 14px; }
@@ -266,7 +284,8 @@
   @media (min-width: 375px) and (max-width: 479px) {
     body { padding: 28px 18px; }
     .links { gap: 10px; }
-    .btn { min-height: 110px; padding: 16px 10px 14px; }
+    .btn { padding: 16px 10px 14px; }
+    .btn.primary { padding: 16px 20px; }
   }
 
   /* Large phones / small tablets (480px - 767px) */
@@ -274,7 +293,7 @@
     body { padding: 36px 24px; }
     .wrap { max-width: 500px; }
     .links { gap: 14px; }
-    .btn { min-height: 130px; padding: 20px 14px 18px; }
+    .btn { padding: 20px 14px 18px; }
     .btn .ico { width: 52px; height: 52px; min-width: 52px; min-height: 52px; }
   }
 
@@ -284,7 +303,7 @@
     .wrap { max-width: 520px; gap: 24px; }
     .avatar { width: 116px; height: 116px; border-radius: 28px; }
     .links { gap: 16px; }
-    .btn { min-height: 140px; padding: 22px 16px 18px; }
+    .btn { padding: 22px 16px 18px; }
     .btn .ico { width: 54px; height: 54px; min-width: 54px; min-height: 54px; border-radius: 16px; }
     .btn .ico svg { width: 26px; height: 26px; }
     .btn:hover { transform: translateY(-3px); }
@@ -297,7 +316,7 @@
     .avatar { width: 70px; height: 70px; border-radius: 18px; }
     .profile { gap: 8px; }
     .links { gap: 8px; }
-    .btn { min-height: 90px; padding: 12px 8px; gap: 6px; }
+    .btn { padding: 12px 8px; gap: 6px; }
     .btn .ico { width: 38px; height: 38px; min-width: 38px; min-height: 38px; }
   }
 
@@ -354,14 +373,14 @@
     avatarImage: "Clinic Logo.png",
     tagline: "Authentic Ayurvedic & Panchakarma Clinic — Girgaon, Mumbai",
     links: [
-      { key:"web",  icon:"web",  title:"Book Appointment", sub:"Explore treatments online",   url:"https://shreevishwamangalyaayurveda.com/" },
+      { key:"web",  icon:"web",  title:"Book Appointment", sub:"Explore treatments",          url:"https://shreevishwamangalyaayurveda.com/", primary:true },
       { key:"yt",   icon:"yt",   title:"YouTube",          sub:"Health tips & insights",      url:"https://youtube.com/@shreevishwamangalyaayurved6239?si=mEP2-U6h1HpETtY0" },
       { key:"ig",   icon:"ig",   title:"Instagram",        sub:"Daily wellness updates",      url:"https://www.instagram.com/shree_vishwamangalya_ayurved?igsh=NTRwdTVlNHp5eHBp" },
       { key:"gb",   icon:"gb",   title:"Google Business",  sub:"View clinic profile",         url:"https://share.google/X29UcsJx9bFeHnh5d" },
       { key:"rev",  icon:"rev",  title:"Leave a Review",   sub:"Rate us on Google",           url:"https://g.page/r/CYeVWBC5N4_GEA0/review" },
-      { key:"loc",  icon:"loc",  title:"Find Us",          sub:"Get directions on Maps",      url:"https://maps.app.goo.gl/mudnBSUZMQdAr2U38" },
-      { key:"wa",   icon:"wac",  title:"WhatsApp Channel", sub:"Join our health channel",     url:"https://whatsapp.com/channel/0029VbD3MWgAu3aWxPhosk2m" },
-      { key:"mail", icon:"mail", title:"Email Us",         sub:"shreevishwamangalya@gmail.com", url:"mailto:shreevishwamangalya@gmail.com" }
+      { key:"loc",  icon:"loc",  title:"Find Us",          sub:"Directions on Maps",          url:"https://maps.app.goo.gl/mudnBSUZMQdAr2U38" },
+      { key:"wa",   icon:"wac",  title:"WhatsApp",         sub:"Join health channel",         url:"https://whatsapp.com/channel/0029VbD3MWgAu3aWxPhosk2m" },
+      { key:"mail", icon:"mail", title:"Email Us",         sub:"Get in touch",                url:"mailto:shreevishwamangalya@gmail.com" }
     ]
   };
 
@@ -369,7 +388,7 @@
     web:'<path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.93 6h-2.95a15.6 15.6 0 00-1.38-3.56A8 8 0 0118.93 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14a7.96 7.96 0 010-4h3.38a16.5 16.5 0 000 4H4.26zm.81 2h2.95c.32 1.25.78 2.45 1.38 3.56A8 8 0 015.07 16zm2.95-8H5.07a8 8 0 014.33-3.56A15.6 15.6 0 008.02 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82A13.7 13.7 0 0112 19.96zM14.34 14H9.66a14.7 14.7 0 010-4h4.68a14.7 14.7 0 010 4zm.27 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8 8 0 01-4.33 3.56zM16.36 14a16.5 16.5 0 000-4h3.38a7.96 7.96 0 010 4h-3.38z"/>',
     yt:'<path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/>',
     ig:'<path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 1.8.25 2.2.42.6.2 1 .45 1.4.9.45.4.7.8.9 1.4.17.4.36 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.06 1.2-.25 1.8-.42 2.2-.2.6-.45 1-.9 1.4-.4.45-.8.7-1.4.9-.4.17-1 .36-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.06-1.8-.25-2.2-.42a3.7 3.7 0 01-1.4-.9 3.7 3.7 0 01-.9-1.4c-.17-.4-.36-1-.42-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.06-1.2.25-1.8.42-2.2.2-.6.45-1 .9-1.4.4-.45.8-.7 1.4-.9.4-.17 1-.36 2.2-.42C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.07-.9.04-1.4.2-1.7.32-.4.17-.7.37-1 .66-.3.3-.5.6-.66 1-.12.3-.28.8-.32 1.7C3.6 8.5 3.6 8.9 3.6 12s0 3.5.07 4.7c.04.9.2 1.4.32 1.7.17.4.37.7.66 1 .3.3.6.5 1 .66.3.12.8.28 1.7.32 1.2.06 1.6.07 4.7.07s3.5 0 4.7-.07c.9-.04 1.4-.2 1.7-.32.4-.17.7-.37 1-.66.3-.3.5-.6.66-1 .12-.3.28-.8.32-1.7.06-1.2.07-1.6.07-4.7s0-3.5-.07-4.7c-.04-.9-.2-1.4-.32-1.7a2.7 2.7 0 00-.66-1 2.7 2.7 0 00-1-.66c-.3-.12-.8-.28-1.7-.32C15.5 4 15.1 4 12 4zm0 3.1a4.9 4.9 0 110 9.8 4.9 4.9 0 010-9.8zm0 8a3.1 3.1 0 100-6.2 3.1 3.1 0 000 6.2zm6.3-8.2a1.15 1.15 0 11-2.3 0 1.15 1.15 0 012.3 0z"/>',
-    gb:'<path d="M12 2a10 10 0 010 20 10 10 0 010-20zm0 4.2c1.9 0 3.5 1.4 3.5 3.2 0 1.8-1.6 3.2-3.5 3.2S8.5 11.2 8.5 9.4c0-1.8 1.6-3.2 3.5-3.2zM6.2 18.3c.7-2.3 2.9-3.9 5.8-3.9s5.1 1.6 5.8 3.9a8 8 0 01-11.6 0z"/>',
+    gb:'<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>',
     rev:'<path d="M12 2l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9z"/>',
     loc:'<path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/>',
     wac:'<path d="M12 2a10 10 0 00-8.5 15.3L2 22l4.8-1.5A10 10 0 1012 2zm0 1.8a8.2 8.2 0 018.2 8.2 8.2 8.2 0 01-8.2 8.2 8.2 8.2 0 01-4.2-1.1l-.3-.2-2.6.8.8-2.5-.2-.3a8.2 8.2 0 014.5-14.9zm-2.6 4.3c-.2 0-.5 0-.7.3l-.9.9c-.2.2-.7.7-.7 1.6s.8 1.9.9 2a3.4 3.4 0 001.5 1.2c.3.1.5.1.7-.1.2-.2.6-.7.8-1 .2-.2.3-.2.6-.1.3.1 1.6.8 1.9.9.3.1.5.2.6.3.2.2.2.4.1.6-.1.2-.4.8-.7 1.1-.3.3-1.5 1.5-2 1.5-1 0-1.9-.3-2.7-.8a8.4 8.4 0 01-2.6-3.4c-.3-.8-.5-1.7-.5-2.5 0-.8.4-1.5.7-2.1.2-.4 1.2-2.3 1.9-2.6.3-.1.6-.2.8-.2z"/>',
@@ -387,7 +406,7 @@
   const linksBox = document.getElementById('links');
   CONFIG.links.filter(function(l) { return l.url; }).forEach(function(l) {
     const a = document.createElement('a');
-    a.className = 'btn';
+    a.className = l.primary ? 'btn primary' : 'btn';
     a.href = l.url;
     a.target = '_blank';
     a.rel = 'noopener noreferrer';
